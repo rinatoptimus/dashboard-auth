@@ -18,12 +18,20 @@ import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
+//import { mainListItems, secondaryListItems } from "./listItems";
 import Pupils from "./Pupils";
 import Books from "./Books";
+import Chart from "./Chart";
 
 import AuthDashboard from "../../authtest/AuthDashboard";
 import { AuthProvider } from "../../authtest/contexts/AuthContext";
+
+//
+import { BrowserRouter as Router } from "react-router-dom";
+import MainListItems from "./listItems";
+import {secondaryListItems} from "./listItems";
+import { Switch, Route } from "react-router-dom";
+//
 
 function Copyright() {
   return (
@@ -131,6 +139,7 @@ export default function Dashboard() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
+    <Router>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -179,10 +188,16 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        {/* <List>{mainListItems}</List> */}
+
+        <List><MainListItems/></List>
+
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
+
+
+
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
@@ -197,24 +212,39 @@ export default function Dashboard() {
                 {/*  */}
               </Paper>
             </Grid>
-            {/* Recent Pupils */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Pupils />
-              </Paper>
-            </Grid>
-            {/* Recent Books */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Books />
-              </Paper>
-            </Grid>
+            
+            <Switch>
+              <Route exact path="/">
+                <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                  <Books />
+                </Paper>
+              </Grid>
+              </Route>
+              <Route exact path="/pupils">
+                <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaper}>
+                  <Pupils />
+                </Paper>
+              </Grid>
+              </Route>
+              <Route exact path="/chart">
+                <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaper}>
+                  <Chart />
+                </Paper>
+              </Grid>
+              </Route>
+            </Switch>
+
           </Grid>
           <Box pt={4}>
             <Copyright />
           </Box>
         </Container>
       </main>
+      
     </div>
+    </Router>
   );
 }

@@ -7,7 +7,7 @@ export default function Chart() {
   return (
     <React.Fragment>
       <Title>Today</Title>
-      <Card>Компонент не используется</Card>
+      <Card>Компонент графиков</Card>
     </React.Fragment>
   );
 }

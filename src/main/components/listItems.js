@@ -8,83 +8,43 @@ import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+//import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import PersonIcon from "@material-ui/icons/Person";
 
 //
-import { Switch, Route, Link } from "react-router-dom";
-import Dashboard from "./Dashboard";
-import Pupils from "./Pupils";
-import Books from "./Books";
+import { Link } from "react-router-dom";
 //
 
-export const mainListItems = (
-  // <div>
-  //   <ListItem button>
-  //     <ListItemIcon>
-  //       <DashboardIcon />
-  //     </ListItemIcon>
-  //     <ListItemText primary="Главная" />
-  //   </ListItem>
-  //   <ListItem button>
-  //     <ListItemIcon>
-  //       <LibraryBooksIcon />
-  //     </ListItemIcon>
-  //     <ListItemText primary="Книги" />
-  //   </ListItem>
-  //   <ListItem button>
-  //     <ListItemIcon>
-  //       <PeopleIcon />
-  //     </ListItemIcon>
-  //     <ListItemText primary="Ученики" />
-  //   </ListItem>
-  //   <ListItem button>
-  //     <ListItemIcon>
-  //       <BarChartIcon />
-  //     </ListItemIcon>
-  //     <ListItemText primary="Графики" />
-  //   </ListItem>
-  //   <ListItem button>
-  //     <ListItemIcon>
-  //       <LayersIcon />
-  //     </ListItemIcon>
-  //     <ListItemText primary="Integrations" />
-  //   </ListItem>
-  // </div>
-
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <Link to="/">Home</Link>
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LibraryBooksIcon />
-      </ListItemIcon>
-      <Link to="/books">Книги</Link>
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <Link to="/pupils">Ученики</Link>
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Графики" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItem>
-  </div>
-);
+const MainListItems = () =>{ 
+  return (
+    <div>
+      <ListItem button>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <Link to="/">Главная</Link>
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <Link to="/pupils">Ученики</Link>
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+        <Link to="/chart">Графики</Link>
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon>
+          <LayersIcon />
+        </ListItemIcon>
+        <ListItemText primary="Integrations" />
+      </ListItem>        
+    </div>
+  )
+};
 
 export const secondaryListItems = (
   <div>
@@ -109,3 +69,5 @@ export const secondaryListItems = (
     </ListItem>
   </div>
 );
+
+export default MainListItems;
