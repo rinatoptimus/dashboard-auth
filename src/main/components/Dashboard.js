@@ -202,16 +202,14 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
+
+            {/* <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                {/*  */}
                 <AuthProvider>
                   <AuthDashboard />
                 </AuthProvider>
-                {/*  */}
               </Paper>
-            </Grid>
+            </Grid> */}
             
             <Switch>
               <Route exact path="/">
@@ -222,16 +220,26 @@ export default function Dashboard() {
               </Grid>
               </Route>
               <Route exact path="/pupils">
-                <Grid item xs={12} md={4} lg={3}>
+                <Grid item xs={12} md={12} lg={12}>
                 <Paper className={fixedHeightPaper}>
                   <Pupils />
                 </Paper>
               </Grid>
               </Route>
               <Route exact path="/chart">
-                <Grid item xs={12} md={4} lg={3}>
+                <Grid item xs={12} md={12} lg={12}>
                 <Paper className={fixedHeightPaper}>
                   <Chart />
+                </Paper>
+              </Grid>
+              </Route>
+
+              <Route exact path="/profile">
+                <Grid item xs={12} md={12} lg={12}>
+                <Paper className={fixedHeightPaper}>
+                <AuthProvider>
+                  <AuthDashboard />
+                </AuthProvider>
                 </Paper>
               </Grid>
               </Route>

@@ -53,7 +53,7 @@ export const secondaryListItems = (
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="Профиль" />
+      <Link to="/profile">Профиль</Link>
     </ListItem>
     <ListItem button>
       <ListItemIcon>
