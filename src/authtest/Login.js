@@ -2,12 +2,37 @@ import React, { useRef, useState } from "react";
 
 import { useAuth } from "./contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-// import { FormControl } from "@material-ui/core/FormControl";
-// import { InputLabel } from "@material-ui/core/InputLabel";
-// import { Input } from "@material-ui/core/Input";
-// import { Button } from "@material-ui/core/Button";
-
 import Alert from "@material-ui/lab/Alert";
+
+//
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 380,
+    margin: '20px auto',
+    '& .MuiTextField-root': {
+      marginBottom: theme.spacing(1)
+    }
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  }
+}));
+//
 
 export default function Login() {
   const emailRef = useRef();
@@ -17,6 +42,10 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
+  // для формы:
+  const classes = useStyles();
+  //
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -24,9 +53,10 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      console.log(emailRef.current.value)
       history.push("/");
     } catch {
-      setError("Failed to log in");
+      setError("Не удалось войти");
     }
 
     setLoading(false);
@@ -34,31 +64,31 @@ export default function Login() {
 
   return (
     <>
-      <div>
-        <div>
-          <h2 className="text-center mb-4">Войдите в аккаунт</h2>
-          {error && <Alert variant="standard">{error}</Alert>}
-          <form onSubmit={handleSubmit}>
+      <Card className={classes.root} variant="outlined">
+        <CardContent>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>Введите email и пароль:</Typography>
+          {error && <Alert severity="error">{error}</Alert>}
+          
+          <form onSubmit={handleSubmit} className={classes.root} noValidate autoComplete="off">
             <div id="email">
-              <label>Email</label>
-              <input type="email" ref={emailRef} required />
+              <TextField fullWidth label="Email" id="outlined-basic" variant="outlined" type="email" inputRef={emailRef} required />
             </div>
             <div id="password">
-              <label>Пароль</label>
-              <input type="password" ref={passwordRef} required />
+              <TextField fullWidth label="Пароль" id="outlined-basic" variant="outlined" type="password" inputRef={passwordRef} required />
             </div>
-            <button disabled={loading} className="w-100" type="submit">
+            <Button variant="contained" color="primary" disabled={loading} type="submit">
               Войти
-            </button>
+            </Button>
           </form>
-          <div className="w-100 text-center mt-3">
+
+          <Button>
             <Link to="/forgot-password">Забыли пароль?</Link>
-          </div>
-        </div>
-      </div>
-      <div className="w-100 text-center mt-2">
-        Зарегистрировать аккаунт? <Link to="/signup">Зарегистрироваться</Link>
-      </div>
+          </Button>
+          <Button>
+            <Link to="/signup">Зарегистрироваться</Link>
+          </Button>
+        </CardContent>
+      </Card>
     </>
   );
 }

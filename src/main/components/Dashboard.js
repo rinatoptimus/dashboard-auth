@@ -27,11 +27,13 @@ import AuthDashboard from "../../authtest/AuthDashboard";
 import { AuthProvider } from "../../authtest/contexts/AuthContext";
 
 //
+import UpdateProfile from "../../authtest/UpdateProfile";
+//
+
 import { BrowserRouter as Router } from "react-router-dom";
 import MainListItems from "./listItems";
 import {secondaryListItems} from "./listItems";
 import { Switch, Route } from "react-router-dom";
-//
 
 function Copyright() {
   return (
@@ -121,10 +123,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     overflow: "auto",
     flexDirection: "column"
-  },
-  fixedHeight: {
-    height: 240
   }
+  // fixedHeight: {
+  //   height: 240
+  // }
 }));
 
 export default function Dashboard() {
@@ -140,119 +142,115 @@ export default function Dashboard() {
 
   return (
     <Router>
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
-      >
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Панель управления
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        {/* <List>{mainListItems}</List> */}
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          position="absolute"
+          className={clsx(classes.appBar, open && classes.appBarShift)}
+        >
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(
+                classes.menuButton,
+                open && classes.menuButtonHidden
+              )}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              Панель управления
+            </Typography>
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          {/* <List>{mainListItems}</List> */}
+          <List><MainListItems/></List>
+          <Divider />
+          <List>{secondaryListItems}</List>
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="xl" className={classes.container}>
+            <Grid container spacing={3}>        
+              <Switch>
+                <Route exact path="/">
+                  <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <Books />
+                  </Paper>
+                </Grid>
+                </Route>
+                <Route exact path="/pupils">
+                  <Grid item xs={12} md={12} lg={12}>
+                  <Paper className={fixedHeightPaper}>
+                    <Pupils />
+                  </Paper>
+                </Grid>
+                </Route>
+                <Route exact path="/chart">
+                  <Grid item xs={12} md={12} lg={12}>
+                  <Paper className={fixedHeightPaper}>
+                    <Chart />
+                  </Paper>
+                </Grid>
+                </Route>
+                <Route exact path="/profile">
+                  <Grid item xs={12} md={12} lg={12}>
+                  <Paper className={fixedHeightPaper}>
+                  <AuthProvider>
+                    <AuthDashboard />
+                  </AuthProvider>
+                  </Paper>
+                </Grid>
+                </Route>
 
-        <List><MainListItems/></List>
+                {/*  */}
+                <Route exact path="/update-profile">
+                  <Grid item xs={12} md={12} lg={12}>
+                  <Paper className={fixedHeightPaper}>
+                  <AuthProvider>
+                    <UpdateProfile />
+                  </AuthProvider>
+                  </Paper>
+                </Grid>
+                </Route>
+                {/*  */}
 
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
-
-
-
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-
-            {/* <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <AuthProvider>
-                  <AuthDashboard />
-                </AuthProvider>
-              </Paper>
-            </Grid> */}
-            
-            <Switch>
-              <Route exact path="/">
-                <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Books />
-                </Paper>
-              </Grid>
-              </Route>
-              <Route exact path="/pupils">
-                <Grid item xs={12} md={12} lg={12}>
-                <Paper className={fixedHeightPaper}>
-                  <Pupils />
-                </Paper>
-              </Grid>
-              </Route>
-              <Route exact path="/chart">
-                <Grid item xs={12} md={12} lg={12}>
-                <Paper className={fixedHeightPaper}>
-                  <Chart />
-                </Paper>
-              </Grid>
-              </Route>
-
-              <Route exact path="/profile">
-                <Grid item xs={12} md={12} lg={12}>
-                <Paper className={fixedHeightPaper}>
-                <AuthProvider>
-                  <AuthDashboard />
-                </AuthProvider>
-                </Paper>
-              </Grid>
-              </Route>
-            </Switch>
-
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
-      </main>
-      
-    </div>
+              </Switch>
+            </Grid>
+            <Box pt={4}>
+              <Copyright />
+            </Box>
+          </Container>
+        </main>
+      </div>
     </Router>
   );
 }

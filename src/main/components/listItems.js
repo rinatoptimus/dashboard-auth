@@ -10,32 +10,35 @@ import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 //import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import PersonIcon from "@material-ui/icons/Person";
-
-//
 import { Link } from "react-router-dom";
-//
 
 const MainListItems = () =>{ 
   return (
     <div>
-      <ListItem button>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <Link to="/">Главная</Link>
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <Link to="/pupils">Ученики</Link>
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <BarChartIcon />
-        </ListItemIcon>
-        <Link to="/chart">Графики</Link>
-      </ListItem>
+      <Link to="/">
+        <ListItem button>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          Главная
+        </ListItem>
+      </Link>
+      <Link to="/pupils">    
+        <ListItem button>
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          Ученики
+        </ListItem>
+      </Link>
+      <Link to="/chart">
+        <ListItem button>
+          <ListItemIcon>
+            <BarChartIcon />
+          </ListItemIcon>
+          Графики
+        </ListItem>
+      </Link>
       <ListItem button>
         <ListItemIcon>
           <LayersIcon />
